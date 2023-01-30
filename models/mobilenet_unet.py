@@ -2,8 +2,29 @@ import tensorflow as tf
 from tensorflow_examples.models.pix2pix import pix2pix
 
 
-def create_model(num_classes, down_stack_trainable=False, input_shape=(128, 128, 3)):
-    base_model = tf.keras.applications.MobileNetV2(input_shape=input_shape, include_top=False)
+def create_model(input_shape=(128, 128, 3), num_classes=3, down_stack_trainable=False, encoder_name='MobileNetV2'):
+    if encoder_name == 'MobileNetV2':
+        base_model = tf.keras.applications.MobileNetV2(input_shape=input_shape, include_top=False)
+    elif encoder_name == 'MobileNetV3Small':
+        base_model = tf.keras.applications.MobileNetV3Small(input_shape=input_shape, include_top=False)
+    elif encoder_name == 'MobileNetV3Large':
+        base_model = tf.keras.applications.MobileNetV3Large(input_shape=input_shape, include_top=False)
+    elif encoder_name == 'MobileNet':
+        base_model = tf.keras.applications.MobileNet(input_shape=input_shape, include_top=False)
+    elif encoder_name == 'NASNetMobile':
+        base_model = tf.keras.applications.NASNetMobile(input_shape=input_shape, include_top=False)
+    elif encoder_name == 'ConvNeXtTiny':
+        base_model = tf.keras.applications.ConvNeXtTiny(input_shape=input_shape, include_top=False)
+    elif encoder_name == 'ConvNeXtSmall':
+        base_model = tf.keras.applications.ConvNeXtSmall(input_shape=input_shape, include_top=False)
+    elif encoder_name == 'EfficientNetB0':
+        base_model = tf.keras.applications.EfficientNetB0(input_shape=input_shape, include_top=False)
+    elif encoder_name == 'EfficientNetV2S':
+        base_model = tf.keras.applications.EfficientNetV2S(input_shape=input_shape, include_top=False)
+    elif encoder_name == 'ResNetRS101':
+        base_model = tf.keras.applications.ResNetRS101(input_shape=input_shape, include_top=False)
+    else:
+        raise ValueError("Invalid encoder name")
 
     # Use the activations of these layers
     layer_names = [
