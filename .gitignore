@@ -1,0 +1,5 @@
+# Do not save images
+*.jpg
+*.png
+*.jpeg
+.ipynb_checkpoints
